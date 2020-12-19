@@ -8,6 +8,7 @@
   <title>Titanic</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
@@ -18,15 +19,16 @@
     </div>
   </div>
   <div class="container-fluid">
-    <select id="selIris" onchange="optionChanged(this.value)">
+    <select id="selection">
       <option value="all">All</option>
-      <option value="Iris-setosa">Iris-setosa</option>
-      <option value="Iris-versicolor">Iris-versicolor</option>
-      <option value="Iris-virginica">Iris-virginica</option>
+      <option value="1st Class">1st Class</option>
+      <option value="2nd Class">2nd Class</option>
+      <option value="3rd Class">3rd Class</option>
     </select>
 
     <div id="hist"></div>
   </div>
+  <script src="../static/js/visuals.js"></script>
 </body>
 
 </html>

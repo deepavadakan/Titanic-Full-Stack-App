@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import numpy as np
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 
 #################################################
@@ -38,7 +38,7 @@ def home():
 
 @app.route("/survived/")
 @app.route("/survived/<class>")
-def precipitation():
+def survived():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
@@ -56,6 +56,30 @@ def precipitation():
     # Create a dictionary from the row data and append to a list
     for pclass, survived in results:
         results_dict[pclass].append(survived)
+    results_dict
+
+    return jsonify(results_dict)
+
+@app.route("/age/")
+@app.route("/age/<class>")
+def age():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of ages of passengers by passenger class """
+    session = Session(engine)
+    results = session.query(Passenger.pclass, Passenger.age).all()
+
+    session.close()
+
+    # Parse results
+    results_dict = {"1st": [], 
+                    "2nd": [], 
+                    "3rd": []}
+
+    # Create a dictionary from the row data and append to a list
+    for pclass, age in results:
+        results_dict[pclass].append(age)
     results_dict
 
     return jsonify(results_dict)
