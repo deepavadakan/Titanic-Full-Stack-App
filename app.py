@@ -56,33 +56,43 @@ def survived():
     # Create a dictionary from the row data and append to a list
     for pclass, survived in results:
         results_dict[pclass].append(survived)
-    results_dict
 
     return jsonify(results_dict)
 
 @app.route("/age/")
-@app.route("/age/<class>")
-def age():
+@app.route("/age/<pclass>")
+def age(pclass=None):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     """Return a list of ages of passengers by passenger class """
-    session = Session(engine)
-    results = session.query(Passenger.pclass, Passenger.age).all()
 
-    session.close()
+    # if no class option, return all passenger ages by class 
+    if not pclass:
+        results = session.query(Passenger.pclass, Passenger.age).all()
 
-    # Parse results
-    results_dict = {"1st": [], 
-                    "2nd": [], 
-                    "3rd": []}
+        session.close()
 
-    # Create a dictionary from the row data and append to a list
-    for pclass, age in results:
-        results_dict[pclass].append(age)
-    results_dict
+        # Parse results
+        results_dict = {"1st": [], 
+                        "2nd": [], 
+                        "3rd": []}
 
-    return jsonify(results_dict)
+        # Create a dictionary from the row data and append to a list
+        for pclass, age in results:
+            results_dict[pclass].append(age)
+        return jsonify(results_dict)
+   
+    else:
+        print(f"Selected class {pclass}")
+        results = session.query(Passenger.age).filter(Passenger.pclass == pclass).all()
+        session.close()
+
+        results_dict = [age for age in np.ravel(results)]
+        print(results_dict)
+        return jsonify(results_dict)
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

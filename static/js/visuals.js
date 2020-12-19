@@ -11,10 +11,66 @@ function runChange() {
     console.log(selection);
 
     if (selection === "all") {
-        console.log("Init");
         init();
     } else {
-
+        d3.json(`/age/${selection}`).then((data) => {
+            // Grab values from the data json object to build the plots
+            console.log(data);
+            switch (selection) {
+                case "1st":
+                    var trace1 = {
+                        x: data,
+                        type: "histogram",
+                        name: "First Class Passeengers",
+                        marker: {
+                            color: "#17BECF"
+                        }
+                    };
+                    break;
+                case "2nd":
+                    var trace1 = {
+                        x: data,
+                        type: "histogram",
+                        name: "Second Class Passeengers",
+                        marker: {
+                            color: "#17BECF"
+                        }
+                    };
+                    break;
+                case "3rd":
+                    var trace1 = {
+                        x: data,
+                        type: "histogram",
+                        name: "Third Class Passeengers",
+                        marker: {
+                            color: "#17BECF"
+                        }
+                    };
+                    break;
+            }
+    
+            var data = [trace1];
+    
+            var layout = {
+                bargap: 0.01,
+                bargroupgap: 0.01,
+                barmode: "overlay",
+                title: "Passenger Ages",
+                xaxis: {
+                    title: "Age"
+                },
+                yaxis: {
+                    title: "Count"
+                }
+            };
+    
+            // Set chart to be responsive 
+            var config = {
+                responsive: true
+            }
+    
+            Plotly.newPlot("hist", data, layout, config);
+        });
     }
 
 
@@ -31,7 +87,7 @@ function init() {
         var trace1 = {
             x: firstClass,
             type: "histogram",
-            name: "Fist Class Passeengers",
+            name: "First Class Passeengers",
             marker: {
                 color: "#17BECF"
             }
