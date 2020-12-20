@@ -1,3 +1,19 @@
-h1 {
-    color: blue;
-}
+/* The styles for the parallax */
+.top-bar {
+    position: relative;
+    height: 250px;
+    padding: 20px;
+    margin: 0;
+    background: black;
+    background-image: url("../images/titanic.jpg");
+    background-attachment: fixed;
+    background-position: top;
+    background-size: 70%;
+    background-repeat: no-repeat;
+  }
+  
+  .hero h1 {
+    margin-top: 100px;
+    font-size: 0.1rem;
+    animation: title 1.2s forwards linear;
+  }

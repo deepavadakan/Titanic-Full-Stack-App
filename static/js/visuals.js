@@ -23,7 +23,7 @@ function runChange() {
                         type: "histogram",
                         name: "First Class Passeengers",
                         marker: {
-                            color: "#17BECF"
+                            color: "#4682B4"
                         }
                     };
                     break;
@@ -33,7 +33,7 @@ function runChange() {
                         type: "histogram",
                         name: "Second Class Passeengers",
                         marker: {
-                            color: "#17BECF"
+                            color: "#808000"
                         }
                     };
                     break;
@@ -43,7 +43,7 @@ function runChange() {
                         type: "histogram",
                         name: "Third Class Passeengers",
                         marker: {
-                            color: "#17BECF"
+                            color: "#B22222"
                         }
                     };
                     break;
@@ -87,27 +87,27 @@ function init() {
         var trace1 = {
             x: firstClass,
             type: "histogram",
-            name: "First Class Passeengers",
+            name: "First Class Passengers",
             marker: {
-                color: "#17BECF"
+                color: "#4682B4"
             }
         };
 
         var trace2 = {
             x: secondClass,
             type: "histogram",
-            name: "Second Class Passeengers",
+            name: "Second Class Passengers",
             marker: {
-                color: "grey"
+                color: "#808000"
             }
         };
 
         var trace3 = {
             x: thirdClass,
             type: "histogram",
-            name: "Third Class Passeengers",
+            name: "Third Class Passengers",
             marker: {
-                color: "brown"
+                color: "#B22222"
             }
         };
 

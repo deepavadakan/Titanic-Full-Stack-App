@@ -7,25 +7,33 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Titanic</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="static/css/style.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="jumbotron text-center">
+  <div class="wrapper">
+    <div class="top-bar jumbotron text-center">
       <h1>Titanic</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
     </div>
-  </div>
-  <div class="container-fluid">
-    <select id="selection">
-      <option value="all">All</option>
-      <option value="1st">1st Class</option>
-      <option value="2nd">2nd Class</option>
-      <option value="3rd">3rd Class</option>
-    </select>
-
-    <div id="hist"></div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">UFO Sightings
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div>Select Passenger Class
+        <select id="selection">
+          <option value="all">All</option>
+          <option value="1st">1st Class</option>
+          <option value="2nd">2nd Class</option>
+          <option value="3rd">3rd Class</option>
+        </select>
+      </div>
+      <div id="hist"></div>
+    </div>
   </div>
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
