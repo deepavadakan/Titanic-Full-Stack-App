@@ -17,3 +17,13 @@
     font-size: 0.1rem;
     animation: title 1.2s forwards linear;
   }
+
+  .header-row {
+    background-color: black;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}

@@ -37,26 +37,40 @@ def home():
 
 
 @app.route("/survived/")
-@app.route("/survived/<class>")
-def survived():
+@app.route("/survived/<pclass>")
+def survived(pclass=None):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     """Return a list of passengers who survived/did not survive by passenger class """
-    session = Session(engine)
-    results = session.query(Passenger.pclass, Passenger.survived).all()
+    
+    # if no class option, return  passenger count by class 
+    if not pclass:
+        results = session.query(Passenger.pclass, Passenger.survived, func.count(Passenger.pclass)).\
+            group_by(Passenger.pclass, Passenger.survived).all()
 
-    session.close()
+        session.close()
 
-    # Parse results
-    results_dict = {"1st": [], 
-                    "2nd": [], 
-                    "3rd": []}
+        # Parse results
+        results_dict = {"1st": [], 
+                        "2nd": [], 
+                        "3rd": []}
 
-    # Create a dictionary from the row data and append to a list
-    for pclass, survived in results:
-        results_dict[pclass].append(survived)
+        # Create a dictionary from the row data and append to a list
+        for pclass, survived, count in results:
+            results_dict[pclass].append(count)
 
+    else:
+        results = session.query(Passenger.survived, func.count(Passenger.survived)).\
+            filter(Passenger.pclass == pclass).\
+            group_by(Passenger.survived).all()
+
+        # Parse results
+        results_dict = []
+
+        for survived, count in results:
+            results_dict.append(count)
+        
     return jsonify(results_dict)
 
 @app.route("/age/")
