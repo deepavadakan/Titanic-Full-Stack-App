@@ -75,7 +75,7 @@ def survived(pclass=None):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of passengers who survived/did not survive by passenger class """
+    """Return a count of passengers who survived/did not survive by passenger class """
     
     # if no class option, return  passenger count by class 
     if not pclass:
@@ -112,7 +112,7 @@ def gender():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a summary of passdenger count by gender and passenger class """
+    """Return count of passengers survival by gender and passenger class """
     
     session = Session(engine)
     results = session.query(Passenger.pclass, Passenger.sex, Passenger.survived, func.count(Passenger.pclass)).\
