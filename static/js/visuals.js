@@ -314,65 +314,71 @@ function plotPie() {
         ];
 
         var data = [{
-        values: allValues[0],
-        labels: allLabels,
-        type: 'pie',
-        name: 'First Class',
-        marker: {
-            colors: ultimateColors[0]
-        },
-        domain: {
-            row: 0,
-            column: 0
-        },
-        hoverinfo: 'label+percent+name',
-        textinfo: 'none',
-        title: "First Class",
-        "titlefont": {
-            "size": 30,
-          }
-        },{
-        values: allValues[1],
-        labels: allLabels,
-        type: 'pie',
-        name: 'Second Class',
-        marker: {
-            colors: ultimateColors[1]
-        },
-        domain: {
-            row: 0,
-            column: 1
-        },
-        hoverinfo: 'label+percent+name',
-        textinfo: 'none',
-        title: "Second Class",
-        "titlefont": {
-            "size": 30,
-          }
-        },{
-        values: allValues[2],
-        labels: allLabels,
-        type: 'pie',
-        name: 'Third Class',
-        marker: {
-            colors: ultimateColors[2]
-        },
-        domain: {
-            row: 0,
-            column: 2
-        },
-        hoverinfo: 'label+percent+name',
-        textinfo: 'none',
-        title: "Third Class",
-        "titlefont": {
-            "size": 30,
-          }
+            values: allValues[0],
+            labels: allLabels,
+            type: 'pie',
+            name: 'First Class',
+            marker: {
+                colors: ultimateColors[0]
+            },
+            domain: {
+                row: 0,
+                column: 0
+            },
+            hoverinfo: 'label+percent+name',
+            textinfo: 'none',
+            title: "First Class",
+            "titlefont": {
+                "size": 30,
+            }
+            },{
+            values: allValues[1],
+            labels: allLabels,
+            type: 'pie',
+            name: 'Second Class',
+            marker: {
+                colors: ultimateColors[1]
+            },
+            domain: {
+                row: 0,
+                column: 1
+            },
+            hoverinfo: 'label+percent+name',
+            textinfo: 'none',
+            title: "Second Class",
+            "titlefont": {
+                "size": 30,
+            }
+            },{
+            values: allValues[2],
+            labels: allLabels,
+            type: 'pie',
+            name: 'Third Class',
+            marker: {
+                colors: ultimateColors[2]
+            },
+            domain: {
+                row: 0,
+                column: 2
+            },
+            hoverinfo: 'label+percent+name',
+            textinfo: 'none',
+            title: "Third Class",
+            "titlefont": {
+                "size": 30,
+            }
         }];
 
         var layout = {
-        height: 800,
-        width: 1000,
-        grid: {rows: 1, columns: 3}
+            height: 400,
+            width: 1000,
+            grid: {rows: 1, columns: 3},
+            legend: {
+                yanchor: "bottom",
+                y: 0.3,
+                xanchor: "bottom",
+                x: 0.99
+            }
         };
 
         Plotly.newPlot('pie', data, layout);
