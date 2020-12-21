@@ -2,11 +2,18 @@
 var dropDownAges = d3.select("#selectionAges");
 var dropDownSurvival = d3.select("#selectionSurvival");
 
+// color for bar charts
+var firstClassColor = "rgb(0, 1, 102)";
+var secondClassColor = "rgb(73, 134, 24)";
+var thirdClassColor = "rgb(224, 224, 21)";
+
 // Create event handlers 
 dropDownAges.on("change", plotAgeByClass);
 dropDownSurvival.on("change", plotSurvivedyClass);
 
+// function to plot histogram for passenger ages by class
 function plotHist() {
+    // retrieve all ages of passengers by class
     d3.json("/age").then((data) => {
         // Grab values from the data json object to build the plots
         console.log(data);
@@ -18,8 +25,9 @@ function plotHist() {
             x: firstClass,
             type: "histogram",
             name: "First Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#4682B4"
+                color: firstClassColor
             }
         };
 
@@ -27,8 +35,9 @@ function plotHist() {
             x: secondClass,
             type: "histogram",
             name: "Second Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#808000"
+                color: secondClassColor
             }
         };
 
@@ -36,8 +45,9 @@ function plotHist() {
             x: thirdClass,
             type: "histogram",
             name: "Third Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#B22222"
+                color: thirdClassColor
             }
         };
 
@@ -65,15 +75,16 @@ function plotHist() {
     });
 }
 
-// Complete the event handler function for the form
+// Event handler function for the dropdown menu for Passenger Ages by Class
 function plotAgeByClass() {
-
+    // find the dropdown selection
     var selection = dropDownAges.property("value");
     console.log(selection);
 
     if (selection === "all") {
         init();
     } else {
+        // retrieve the liat of passenger ages for selected class
         d3.json(`/age/${selection}`).then((data) => {
             // Grab values from the data json object to build the plots
             console.log(data);
@@ -83,8 +94,9 @@ function plotAgeByClass() {
                         x: data,
                         type: "histogram",
                         name: "First Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#4682B4"
+                            color: firstClassColor
                         }
                     };
                     break;
@@ -93,8 +105,9 @@ function plotAgeByClass() {
                         x: data,
                         type: "histogram",
                         name: "Second Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#808000"
+                            color: secondClassColor
                         }
                     };
                     break;
@@ -103,8 +116,9 @@ function plotAgeByClass() {
                         x: data,
                         type: "histogram",
                         name: "Third Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#B22222"
+                            color: thirdClassColor
                         }
                     };
                     break;
@@ -135,14 +149,16 @@ function plotAgeByClass() {
     }
 }
 
+// function to draw a bar graph for passengers survival by class
 function plotBar() {
+    // retrieve the count of passenger survival by class
     d3.json("/survived").then((data) => {
         // Grab values from the data json object to build the plots
         console.log(data);
         var firstClass = data["1st"];
         var secondClass = data["2nd"];
         var thirdClass = data["3rd"];
-        var survivedArray = ["survived", "didnot survive"];
+        var survivedArray = ["survived", "did not survive"];
         var y = [];
 
         var trace1 = {
@@ -150,8 +166,9 @@ function plotBar() {
             y: firstClass,
             type: "bar",
             name: "First Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#4682B4"
+                color: firstClassColor
             }
         };
 
@@ -160,8 +177,9 @@ function plotBar() {
             y: secondClass,
             type: "bar",
             name: "Second Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#808000"
+                color: secondClassColor
             }
         };
 
@@ -170,8 +188,9 @@ function plotBar() {
             y: thirdClass,
             type: "bar",
             name: "Third Class Passengers",
+            opacity: 0.5,
             marker: {
-                color: "#B22222"
+                color: thirdClassColor
             }
         };
 
@@ -199,7 +218,7 @@ function plotBar() {
     });
 }
 
-
+// Event handler function for the dropdown menu for Passenger Survival by Class
 function plotSurvivedyClass() {
     var selection = dropDownSurvival.property("value");
     console.log(selection);
@@ -207,6 +226,7 @@ function plotSurvivedyClass() {
     if (selection === "all") {
         init();
     } else {
+        // retrieve the count of passenger survival by class
         d3.json(`/survived/${selection}`).then((data) => {
             // Grab values from the data json object to build the plots
             console.log(data);
@@ -218,8 +238,9 @@ function plotSurvivedyClass() {
                         y: data,
                         type: "bar",
                         name: "First Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#4682B4"
+                            color: firstClassColor
                         }
                     };
                     break;
@@ -229,8 +250,9 @@ function plotSurvivedyClass() {
                         y: data,
                         type: "bar",
                         name: "Second Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#808000"
+                            color: secondClassColor
                         }
                     };
                     break;
@@ -240,8 +262,9 @@ function plotSurvivedyClass() {
                         y: data,
                         type: "bar",
                         name: "Third Class Passengers",
+                        opacity: 0.5,
                         marker: {
-                            color: "#B22222"
+                            color: thirdClassColor
                         }
                     };
                     break;
@@ -272,12 +295,95 @@ function plotSurvivedyClass() {
     }
 }
 
+// function to plot pie chart of passenger survival by class and gender
+function plotPie() {
+    // retrieve count of passenger survival by class and gender
+    d3.json("/gender-class").then((data) => {
+        var allLabels = ['Female did not survive', 'Female survived', 'Male did not survive', 'Male survived'];
+        console.log(`plotPie ${data}`)
+        var allValues = [
+            data["1st"],
+            data["2nd"],
+            data["3rd"]
+        ];
 
+        var ultimateColors = [
+        ['rgb(128,0,0)', 'rgb(205, 152, 36)', 'rgb(34, 53, 101)', 'rgb(0, 70, 204)'],
+        ['rgb(128,0,0)', 'rgb(205, 152, 36)', 'rgb(34, 53, 101)', 'rgb(0, 70, 204)'],
+        ['rgb(128,0,0)', 'rgb(205, 152, 36)', 'rgb(34, 53, 101)', 'rgb(0, 70, 204)']
+        ];
 
+        var data = [{
+        values: allValues[0],
+        labels: allLabels,
+        type: 'pie',
+        name: 'First Class',
+        marker: {
+            colors: ultimateColors[0]
+        },
+        domain: {
+            row: 0,
+            column: 0
+        },
+        hoverinfo: 'label+percent+name',
+        textinfo: 'none',
+        title: "First Class",
+        "titlefont": {
+            "size": 30,
+          }
+        },{
+        values: allValues[1],
+        labels: allLabels,
+        type: 'pie',
+        name: 'Second Class',
+        marker: {
+            colors: ultimateColors[1]
+        },
+        domain: {
+            row: 0,
+            column: 1
+        },
+        hoverinfo: 'label+percent+name',
+        textinfo: 'none',
+        title: "Second Class",
+        "titlefont": {
+            "size": 30,
+          }
+        },{
+        values: allValues[2],
+        labels: allLabels,
+        type: 'pie',
+        name: 'Third Class',
+        marker: {
+            colors: ultimateColors[2]
+        },
+        domain: {
+            row: 0,
+            column: 2
+        },
+        hoverinfo: 'label+percent+name',
+        textinfo: 'none',
+        title: "Third Class",
+        "titlefont": {
+            "size": 30,
+          }
+        }];
 
+        var layout = {
+        height: 800,
+        width: 1000,
+        grid: {rows: 1, columns: 3}
+        };
+
+        Plotly.newPlot('pie', data, layout);
+    });
+}
+
+// initial function
 function init() {
     plotHist();
     plotBar();
+    plotPie();
 }
 
 init();

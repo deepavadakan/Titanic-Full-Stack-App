@@ -35,6 +35,39 @@ def home():
     
     return render_template("index.html")
 
+@app.route("/age/")
+@app.route("/age/<pclass>")
+def age(pclass=None):
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of ages of passengers by passenger class """
+
+    # if no class option, return all passenger ages by class 
+    if not pclass:
+        results = session.query(Passenger.pclass, Passenger.age).all()
+
+        session.close()
+
+        # Parse results
+        results_dict = {"1st": [], 
+                        "2nd": [], 
+                        "3rd": []}
+
+        # Create a dictionary from the row data and append to a list
+        for pclass, age in results:
+            results_dict[pclass].append(age)
+        return jsonify(results_dict)
+   
+    else:
+        print(f"Selected class {pclass}")
+        results = session.query(Passenger.age).filter(Passenger.pclass == pclass).all()
+        session.close()
+
+        results_dict = [age for age in np.ravel(results)]
+        print(results_dict)
+        return jsonify(results_dict)
+
 
 @app.route("/survived/")
 @app.route("/survived/<pclass>")
@@ -73,40 +106,27 @@ def survived(pclass=None):
         
     return jsonify(results_dict)
 
-@app.route("/age/")
-@app.route("/age/<pclass>")
-def age(pclass=None):
+
+@app.route("/gender-class/")
+def gender():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of ages of passengers by passenger class """
-
-    # if no class option, return all passenger ages by class 
-    if not pclass:
-        results = session.query(Passenger.pclass, Passenger.age).all()
-
-        session.close()
-
-        # Parse results
-        results_dict = {"1st": [], 
-                        "2nd": [], 
-                        "3rd": []}
-
-        # Create a dictionary from the row data and append to a list
-        for pclass, age in results:
-            results_dict[pclass].append(age)
-        return jsonify(results_dict)
-   
-    else:
-        print(f"Selected class {pclass}")
-        results = session.query(Passenger.age).filter(Passenger.pclass == pclass).all()
-        session.close()
-
-        results_dict = [age for age in np.ravel(results)]
-        print(results_dict)
-        return jsonify(results_dict)
-
+    """Return a summary of passdenger count by gender and passenger class """
     
+    session = Session(engine)
+    results = session.query(Passenger.pclass, Passenger.sex, Passenger.survived, func.count(Passenger.pclass)).\
+        group_by(Passenger.pclass, Passenger.sex, Passenger.survived).all()
+
+    # Parse results
+    results_dict = {"1st": [],
+                    "2nd": [],
+                    "3rd": []}
+
+    for pclass, gender, survival, count in results:
+        results_dict[pclass].append(count)
+    
+    return jsonify(results_dict)
 
 if __name__ == '__main__':
     app.run(debug=True)
