@@ -13,7 +13,7 @@
 <body>
   <div class="wrapper">
     <div class="top-bar jumbotron text-center">
-      <h1>Titanic Visualization</h1>
+      <h1>Titanic Data Analysis</h1>
     </div>
     <div class="row header-row">
       Passenger Ages by Class
@@ -27,7 +27,7 @@
           <option value="3rd">3rd Class</option>
         </select>
       </div>
-      <div id="hist"></div>
+      <div id="hist-passenger"></div>
     </div>
     <div class="row header-row">
       Passenger Survival by Class
@@ -41,13 +41,19 @@
           <option value="3rd">3rd Class</option>
         </select>
       </div>
-      <div id="bar"></div>
+      <div id="bar-passenger"></div>
     </div>
     <div class="row header-row">
       Passenger Survival by Class and Gender
     </div>
     <div class="container-fluid">
-      <div id="pie"></div>
+      <div id="pie-passenger"></div>
+    </div>
+    <div class="row header-row">
+      Passenger Survival by Age and Gender
+    </div>
+    <div class="container-fluid">
+      <div id="boxplot-passenger"></div>
     </div>
   </div>
   <script src="https://d3js.org/d3.v6.min.js"></script>

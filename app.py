@@ -118,6 +118,8 @@ def gender():
     results = session.query(Passenger.pclass, Passenger.sex, Passenger.survived, func.count(Passenger.pclass)).\
         group_by(Passenger.pclass, Passenger.sex, Passenger.survived).all()
 
+    session.close()
+
     # Parse results
     results_dict = {"1st": [],
                     "2nd": [],
@@ -125,6 +127,32 @@ def gender():
 
     for pclass, gender, survival, count in results:
         results_dict[pclass].append(count)
+    
+    return jsonify(results_dict)
+
+@app.route("/class-age/")
+def class_age():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return count of passengers survival by passenger class and age """
+    
+    session = Session(engine)
+    results = session.query(Passenger.pclass, Passenger.age, Passenger.survived).all()
+
+    session.close()
+    
+    # Parse results
+    results_dict = {"1st 0": [],
+                    "1st 1": [],
+                    "2nd 0": [],
+                    "2nd 1": [],
+                    "3rd 0": [],
+                    "3rd 1": []}
+
+    for pclass, age, survived in results:
+        new_str = pclass + " " + str(survived)
+        results_dict[new_str].append(age)
     
     return jsonify(results_dict)
 
