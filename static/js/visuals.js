@@ -396,7 +396,8 @@ function plotBoxPlot() {
                 whiskerwidth: 0.2,
                 fillcolor: colors[i],
                 marker: {
-                    size: 2
+                    size: 2,
+                    color: colors[i]
                 },
                 line: {
                     width: 1
@@ -406,7 +407,7 @@ function plotBoxPlot() {
         };
 
         layout = {
-            title: 'Passenger Survival by Age and Gender',
+            title: 'Passenger Survival by Age and Class',
             yaxis: {
                 title: 'Age',
                 autorange: true,
