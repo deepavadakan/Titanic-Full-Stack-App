@@ -48,8 +48,10 @@ function plotHist() {
             }
         };
 
+        // data
         var data = [trace1, trace2, trace3];
 
+        // layout
         var layout = {
             bargap: 0.01,
             bargroupgap: 0.01,
@@ -68,7 +70,8 @@ function plotHist() {
             responsive: true
         }
 
-        Plotly.newPlot('hist-passenger', data, layout, config);
+        // Render the plot to the div tag with id "hist"
+        Plotly.newPlot('hist', data, layout, config);
     });
 }
 
@@ -81,12 +84,12 @@ function plotAgeByClass() {
     if (selection === 'all') {
         init();
     } else {
-        // retrieve the liat of passenger ages for selected class
+        // retrieve the list of passenger ages for selected class
         d3.json(`/age/${selection}`).then((weAPIdata) => {
-            // Grab values from the data json object to build the plots
+            // display plot depending on selection
             console.log(weAPIdata);
             switch (selection) {
-                case '1st':
+                case '1st': // First Class
                     var trace1 = {
                         x: weAPIdata,
                         type: 'histogram',
@@ -96,7 +99,7 @@ function plotAgeByClass() {
                         }
                     };
                     break;
-                case '2nd':
+                case '2nd': // Second Class
                     var trace1 = {
                         x: weAPIdata,
                         type: 'histogram',
@@ -106,7 +109,7 @@ function plotAgeByClass() {
                         }
                     };
                     break;
-                case '3rd':
+                case '3rd': // Third Class
                     var trace1 = {
                         x: weAPIdata,
                         type: 'histogram',
@@ -116,10 +119,14 @@ function plotAgeByClass() {
                         }
                     };
                     break;
+                default:
+                    break;
             }
     
+            //data
             var data = [trace1];
     
+            // layout
             var layout = {
                 bargap: 0.01,
                 bargroupgap: 0.01,
@@ -138,7 +145,8 @@ function plotAgeByClass() {
                 responsive: true
             }
     
-            Plotly.newPlot('hist-passenger', data, layout, config);
+            // Render the plot to the div tag with id "hist"
+            Plotly.newPlot('hist', data, layout, config);
         });
     }
 }
@@ -185,8 +193,10 @@ function plotBar() {
             }
         };
 
+        // data
         var data = [trace1, trace2, trace3];
 
+        // layout
         var layout = {
             bargap: 0.01,
             bargroupgap: 0.01,
@@ -202,7 +212,8 @@ function plotBar() {
             responsive: true
         }
 
-        Plotly.newPlot('bar-passenger', data, layout, config);
+        // Render the plot to the div tag with id "bar"
+        Plotly.newPlot('bar', data, layout, config);
     });
 }
 
@@ -220,7 +231,7 @@ function plotSurvivedyClass() {
             console.log(weAPIdata);
             var survivedArray = ['did not survive', 'survived'];
             switch (selection) {
-                case '1st':
+                case '1st': // First Class
                     var trace1 = {
                         x: survivedArray,
                         y: weAPIdata,
@@ -231,7 +242,7 @@ function plotSurvivedyClass() {
                         }
                     };
                     break;
-                case '2nd':
+                case '2nd': // Second Class
                     var trace1 = {
                         x: survivedArray,
                         y: weAPIdata,
@@ -242,7 +253,7 @@ function plotSurvivedyClass() {
                         }
                     };
                     break;
-                case '3rd':
+                case '3rd': // Third Class
                     var trace1 = {
                         x: survivedArray,
                         y: weAPIdata,
@@ -253,10 +264,14 @@ function plotSurvivedyClass() {
                         }
                     };
                     break;
+                default:
+                    break;
             }
     
+            // data
             var data = [trace1];
     
+            // layout
             var layout = {
                 bargap: 0.01,
                 bargroupgap: 0.01,
@@ -272,7 +287,8 @@ function plotSurvivedyClass() {
                 responsive: true
             }
     
-            Plotly.newPlot('bar-passenger', data, layout, config);
+            // Render the plot to the div tag with id "bar"
+            Plotly.newPlot('bar', data, layout, config);
         });
     }
 }
@@ -295,6 +311,7 @@ function plotPie() {
         ['rgb(128,0,0)', 'rgb(205, 152, 36)', 'rgb(34, 53, 101)', 'rgb(0, 70, 204)']
         ];
 
+        // data
         var data = [{
             values: allValues[0],
             labels: allLabels,
@@ -351,6 +368,7 @@ function plotPie() {
             }
         }];
 
+        // layout
         var layout = {
             height: 400,
             width: 1100,
@@ -363,7 +381,8 @@ function plotPie() {
             }
         };
 
-        Plotly.newPlot('pie-passenger', data, layout);
+        // Render the plot to the div tag with id "pie"
+        Plotly.newPlot('pie', data, layout);
     });
 }
 
@@ -384,6 +403,7 @@ function plotBoxPlot() {
             ];
         var colors = [firstClassColor, firstClassColor, secondClassColor, secondClassColor, thirdClassColor, thirdClassColor];
 
+        // data
         var data = [];
 
         for ( var i = 0; i < xData.length; i ++ ) {
@@ -406,6 +426,7 @@ function plotBoxPlot() {
             data.push(result);
         };
 
+        // layout
         layout = {
             title: 'Passenger Survival by Age and Class',
             yaxis: {
@@ -425,7 +446,8 @@ function plotBoxPlot() {
             showlegend: false
         };
 
-        Plotly.newPlot('boxplot-passenger', data, layout);
+        // Render the plot to the div tag with id "boxplot"
+        Plotly.newPlot('boxplot', data, layout);
     });
 }
 
