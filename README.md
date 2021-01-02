@@ -38,10 +38,10 @@ https://mytitanic-analysis.herokuapp.com/
 ![Passenger Survival By Age and Class](static/images/p_ageAndClass.png)
 
 
-3. Create html page that to display the rendered visualizations.   
+3. Create html page to display the rendered visualizations.   
 
 
-4. Deploy your app to Heroku.   
+4. Deploy app to Heroku.   
 [mytitanic_app](https://mytitanic-analysis.herokuapp.com/)
 
 
