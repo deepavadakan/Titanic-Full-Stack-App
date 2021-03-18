@@ -30,11 +30,19 @@ Python Flask-powered API with seven routes.
 
 Four plotly javascript visualizations 
 
+Compare the number of passengers by class.
+
 ![Passenger Ages By Class](static/images/p_agesByClass.png)
+
+Compare the passenger survival by class.
 
 ![Passenger Survival By Class](static/images/p_survivalByClass.png)
 
+Pie charts comparing passenger gender and survival by class.
+
 ![Passenger Survival By Class and Gender](static/images/p_ClassAndGender.png)
+
+Box plot comparing passenger survival by age and class.
 
 ![Passenger Survival By Age and Class](static/images/p_ageAndClass.png)
 
