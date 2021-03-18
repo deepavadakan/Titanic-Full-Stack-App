@@ -1,11 +1,12 @@
-# Festivus Challenge
+# Titanic Full Stack App
 
 >  Build a full-stack app and deploy it to Heroku
 
 
 ## Table of contents
 * [Deployed App](#Deployed-App)
-* [Tasks](#Tasks)
+* [Visualizations](#Visualizations)
+* [Technologies](#Tasks)
 * [Contact](#Contact)
 
 ## Deployed App
@@ -13,9 +14,9 @@
 https://mytitanic-analysis.herokuapp.com/
 
 
-## Tasks
+## Visualizations
 
-1.  Python Flask-powered API with seven routes.
+Python Flask-powered API with seven routes.
 
 ```  
 @app.route("/")
@@ -27,7 +28,7 @@ https://mytitanic-analysis.herokuapp.com/
 @app.route("/class-age/")
 ```
 
-2. Four plotly javascript visualizations 
+Four plotly javascript visualizations 
 
 ![Passenger Ages By Class](static/images/p_agesByClass.png)
 
@@ -38,12 +39,16 @@ https://mytitanic-analysis.herokuapp.com/
 ![Passenger Survival By Age and Class](static/images/p_ageAndClass.png)
 
 
-3. Create html page to display the rendered visualizations.   
-
-
-4. Deploy app to Heroku.   
-[mytitanic_app](https://mytitanic-analysis.herokuapp.com/)
-
+## Technologies
+- Python
+- Flask
+- Javascript
+- HTML/ CSS
+- Bootstrap
+- Plotly
+- SQLAlchemy
+- SQLite
+- Heroku
 
 ## Contact
 Created by [@deepavadakan](https://github.com/)
